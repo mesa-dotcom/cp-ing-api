@@ -27,7 +27,7 @@ app.get("/hello", (req: Request, res: Response) => {
 // })
 
 app.post("/ping", (req: Request, res: Response) => {
-  const { ip, times } = req.body;
+  const { ip } = req.body;
   _ping.promise
     .probe(ip)
     .then((result) => {
