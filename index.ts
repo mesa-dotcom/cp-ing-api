@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import * as _ping from "ping";
 import cors from "cors";
 import * as bodyParser from "body-parser";
+import * as _fs from "fs";
 
 dotenv.config();
 
@@ -14,6 +15,16 @@ app.use(bodyParser.json());
 
 app.get("/hello", (req: Request, res: Response) => {
   res.send(JSON.stringify({ message: "Hello World" }));
+});
+
+app.get("/setting", (req: Request, res: Response) => {
+  _fs.readFile("./db/setting.json", (err, json) => {
+    if (err) {
+      res.send(JSON.stringify({ message: "Error" }));
+    } else {
+      res.send(JSON.stringify(JSON.parse(json.toString())));
+    }
+  });
 });
 
 // app.post("/group-ping", async (req: Request, res: Response) => {
