@@ -27,6 +27,17 @@ app.get("/setting", (req: Request, res: Response) => {
   });
 });
 
+app.post("/setting", (req: Request, res: Response) => {
+  const { setting } = req.body;
+  _fs.writeFile("./db/setting.json", JSON.stringify(setting), (err) => {
+    if (err) {
+      res.send(JSON.stringify({ message: "Error" }));
+    } else {
+      res.send(JSON.stringify({ message: "Success" }));
+    }
+  });
+});
+
 // app.post("/group-ping", async (req: Request, res: Response) => {
 //   const responses: any[] = []
 //   const { ips } = req.body;
